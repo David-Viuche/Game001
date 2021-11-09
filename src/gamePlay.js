@@ -2,7 +2,12 @@ GamePlayManager = {
     //inicializa estado se ejecuta con start 
     //se inicializan variables
     init: function () {
-        console.log('init');
+        //lo que se muestra en pantalla se adapta a las dimensiones de la pantalla
+        game.scale.scaleMod = Phaser.ScaleManager.SHOW_ALL;
+
+        //alinear juego horizontal y verticalmente en la pantalla
+        game.scale.pageAlignVertically = true;
+        game.scale.pageAlignHorizontally = true;
     },
     //carga recursos del proyecto
     preload: function () {
