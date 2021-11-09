@@ -13,11 +13,23 @@ GamePlayManager = {
     preload: function () {
         //se carga imagen de fondo
         game.load.image('background', 'assets/images/background.png');
+
+        //cargar sprite sheet (varios sprites en una sola imagen)
+        //(id, ruta, ancho sprite, alto sprite, cantidad)
+        game.load.spritesheet('horse', 'assets/images/horse.png', 84, 156, 2)
     },
     //una vez cargue recursos llama create
     create: function () {
         //agregar sprite (coordenadas, id imagen)
         game.add.sprite(0, 0, 'background');
+
+        //guardar instacia del sprite en el objeto manager
+        this.horse = game.add.sprite(0, 0, 'horse');
+        //propiedad numero de sprinte a mostrar
+        this.horse.frame = 1;
+        //mover sprite al centro de la pantalla
+        this.horse.x = game.width / 2;
+        this.horse.y = game.height / 2;
     },
     //frame a frame lo llama
     update: function () {
