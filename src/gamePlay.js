@@ -9,6 +9,8 @@ let GamePlayManager = {
         //alinear juego horizontal y verticalmente en la pantalla
         game.scale.pageAlignVertically = true;
         game.scale.pageAlignHorizontally = true;
+
+        this.flagFirstMouseDown = false;
     },
     //carga recursos del proyecto
     preload: function () {
@@ -40,7 +42,7 @@ let GamePlayManager = {
         this.horse.y = game.height / 2;
 
         //set el punto de rotacion en la pantalla o movimiento relativo
-        this.horse.anchor.setTo(0.5,0.5);
+        this.horse.anchor.setTo(0.5, 0.5);
 
         //rotar sprite
         //this.horse.angle = 0; //valor en grados
@@ -50,24 +52,32 @@ let GamePlayManager = {
 
         //opacidad del sprite
         //this.horse.alpha = 0.3;
+
+        game.input.onDown.add(this.onTap, this);
+    },
+    onTap:function () {
+        this.flagFirstMouseDown = true;
     },
     //frame a frame lo llama
     update: function () {
-       // this.horse.angle += 1;
-       let pointerX = game.input.x;
-       let pointerY = game.input.y;
+        // this.horse.angle += 1;
 
-       let distX = pointerX - this.horse.x;
-       let distY = pointerY - this.horse.y;
+        if (this.flagFirstMouseDown) {
+            let pointerX = game.input.x;
+            let pointerY = game.input.y;
 
-       if(distX > 0){
-            this.horse.scale.setTo(1,1);
-       }else{
-            this.horse.scale.setTo(-1,1);
-       }
+            let distX = pointerX - this.horse.x;
+            let distY = pointerY - this.horse.y;
 
-       this.horse.x += distX * 0.02;
-       this.horse.y += distY * 0.02;
+            if (distX > 0) {
+                this.horse.scale.setTo(1, 1);
+            } else {
+                this.horse.scale.setTo(-1, 1);
+            }
+
+            this.horse.x += distX * 0.02;
+            this.horse.y += distY * 0.02;
+        }
     }
 }
 
