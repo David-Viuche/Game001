@@ -1,4 +1,5 @@
-GamePlayManager = {
+'use strict'
+let GamePlayManager = {
     //inicializa estado se ejecuta con start 
     //se inicializan variables
     init: function () {
@@ -16,7 +17,9 @@ GamePlayManager = {
 
         //cargar sprite sheet (varios sprites en una sola imagen)
         //(id, ruta, ancho sprite, alto sprite, cantidad)
-        game.load.spritesheet('horse', 'assets/images/horse.png', 84, 156, 2)
+        game.load.spritesheet('horse', 'assets/images/horse.png', 84, 156, 2);
+
+        game.load.spritesheet('diamonds', 'assets/images/diamonds.png', 81, 84, 4);
     },
     //una vez cargue recursos llama create
     create: function () {
@@ -25,15 +28,26 @@ GamePlayManager = {
 
         //guardar instacia del sprite en el objeto manager
         this.horse = game.add.sprite(0, 0, 'horse');
+
+        this.diamonds = game.add.sprite(0, 0, 'diamonds');
+
+        this.diamonds.frame = 0;
+
         //propiedad numero de sprinte a mostrar
         this.horse.frame = 1;
         //mover sprite al centro de la pantalla
         this.horse.x = game.width / 2;
         this.horse.y = game.height / 2;
+
+        //set el punto de rotacion en la pantalla o movimiento relativo
+        this.horse.anchor.setTo(0.5,0.5);
+
+        //rotar sprite
+        this.horse.angle = 15; //valor en grados
     },
     //frame a frame lo llama
     update: function () {
-        console.log('update');
+        
     }
 }
 
