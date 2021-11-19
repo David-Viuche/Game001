@@ -40,20 +40,34 @@ let GamePlayManager = {
         this.horse.y = game.height / 2;
 
         //set el punto de rotacion en la pantalla o movimiento relativo
-        this.horse.anchor.setTo(0,0.5);
+        this.horse.anchor.setTo(0.5,0.5);
 
         //rotar sprite
-        this.horse.angle = 0; //valor en grados
+        //this.horse.angle = 0; //valor en grados
 
         //escala del sprite
-        this.horse.scale.setTo(0.5,0.5);
+        //this.horse.scale.setTo(0.5,0.5);
 
         //opacidad del sprite
-        this.horse.alpha = 0.3;
+        //this.horse.alpha = 0.3;
     },
     //frame a frame lo llama
     update: function () {
        // this.horse.angle += 1;
+       let pointerX = game.input.x;
+       let pointerY = game.input.y;
+
+       let distX = pointerX - this.horse.x;
+       let distY = pointerY - this.horse.y;
+
+       if(distX > 0){
+            this.horse.scale.setTo(1,1);
+       }else{
+            this.horse.scale.setTo(-1,1);
+       }
+
+       this.horse.x += distX * 0.02;
+       this.horse.y += distY * 0.02;
     }
 }
 
