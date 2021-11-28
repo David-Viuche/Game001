@@ -1,4 +1,7 @@
 'use strict'
+
+let AMOUNT_DIAMONDS = 30;
+
 let GamePlayManager = {
     //inicializa estado se ejecuta con start 
     //se inicializan variables
@@ -54,8 +57,19 @@ let GamePlayManager = {
         //this.horse.alpha = 0.3;
 
         game.input.onDown.add(this.onTap, this);
+
+        this.diamonds = [];
+
+        for (let i = 0; i < AMOUNT_DIAMONDS; i++) {
+            let diamond = game.add.sprite(100, 100, 'diamonds');
+            diamond.frame = game.rnd.integerInRange(0, 3);
+            diamond.scale.setTo(0.3 + game.rnd.frac()); //frac retorna un valor entre 0 y 1
+            diamond.anchor.setTo(0.5);
+            diamond.x = game.rnd.integerInRange(50, 1050);
+            diamond.y = game.rnd.integerInRange(50, 600);
+        }
     },
-    onTap:function () {
+    onTap: function () {
         this.flagFirstMouseDown = true;
     },
     //frame a frame lo llama
